@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
 import { DeleteProduct, GetProducts, NewProduct, UpdateProduct } from "../../api/products";
 import { InputCustom } from "../../components/common/InputCustom/InputCustom";
+import { ProductForm } from "../../components/ProductForm/ProductForm";
 import { GetEmptyProduct, Product } from "../../model/Product";
 
 export const Products = () => {
@@ -89,33 +90,7 @@ export const Products = () => {
         </div>
       ) : (
         <div >
-          <form className={styles.addProductForm}>
-            <InputCustom
-              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Name: e.target.value })}
-              label="Nombre del producto"
-              value={selectedProduct.Name}
-            />
-            <InputCustom
-              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Price: e.target.value })}
-              label="Precio del producto"
-              value={selectedProduct.Price}
-            />
-            <InputCustom
-              rows={4}
-              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Description: e.target.value })}
-              label="Descriptcion del producto"
-              value={selectedProduct.Description}
-            />
-            <InputCustom
-              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Images: [e.target.value] })}
-              label="Imagen del producto"
-              value={selectedProduct.Images[0]}
-            />
-            <img src={selectedProduct.Images[0]} />
-            <button type="button" onClick={() => HandleProduct()}>
-              {txtButton}
-            </button>
-          </form>
+         <ProductForm product={selectedProduct}/>
         </div>
       )}
     </div>
