@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   updateDoc,
@@ -19,12 +20,18 @@ export const GetProducts = async (userId: any) => {
 export const NewProduct = async (product: Product) => {
   const newDoc = await addDoc(collection(db, Collection.Products), product);
   product.Id = newDoc.id;
-  await UpdatePlayer(product);
+  await UpdateProduct(product);
   return newDoc;
 };
 
-export const UpdatePlayer = async (product: any) => {
+export const UpdateProduct = async (product: any) => {
   const docRef = doc(db, Collection.Products, product.Id);
   await updateDoc(docRef, product);
   return await updateDoc(docRef, product);
+};
+
+export const DeleteProduct = async (product: any) => {
+  const docRef = doc(db, Collection.Products, product.Id);
+
+  return await deleteDoc(docRef);
 };

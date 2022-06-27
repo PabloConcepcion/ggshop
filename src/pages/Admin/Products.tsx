@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
-import { GetProducts, NewProduct } from "../../api/products";
+import { DeleteProduct, GetProducts, NewProduct, UpdateProduct } from "../../api/products";
 import { InputCustom } from "../../components/common/InputCustom/InputCustom";
 import { GetEmptyProduct, Product } from "../../model/Product";
 
 export const Products = () => {
   const [addingProduct, setAddingProduct] = useState(false);
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [productImg, setProductImg] = useState("");
   const [listProducts, setListProducts] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product>(GetEmptyProduct());
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const styles = ProductsStyle();
-  const AddProduct = async () => {
-    const newProduct = GetEmptyProduct();
-    newProduct.Name = productName;
-    newProduct.Price = productPrice;
-    newProduct.Description = productDescription;
-    newProduct.Images.push(productImg);
+  const HandleProduct = async () => {
+    if (isDeleting) {
+      await DeleteProduct(selectedProduct);
+    } else {
+      if (selectedProduct.Id.length > 0) {
+        await UpdateProduct(selectedProduct);
 
-    const newProductAdded = await NewProduct(newProduct);
+      } else {
+        await NewProduct(selectedProduct);
+      }
+    }
+
+
     GetProductsList();
     setAddingProduct(!addingProduct)
   };
@@ -34,6 +37,27 @@ export const Products = () => {
 
     }
   })
+  const HandleEdit = (product: Product) => {
+    setSelectedProduct(product);
+    setAddingProduct(!addingProduct);
+  }
+
+  const HandleDelete = (product: Product) => {
+    HandleEdit(product);
+    setIsDeleting(!isDeleting);
+  }
+  let txtButton = "";
+  if (isDeleting) {
+    txtButton = "Eliminar";
+  }
+  else {
+    if (selectedProduct.Id.length > 0) {
+      txtButton = "Actualizar";
+    }
+    else {
+      txtButton = "Añadir";
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.button}>
@@ -56,37 +80,40 @@ export const Products = () => {
                     return <img src={img} key={indexImg} alt={item.Name} />
                   })
                   }
-
                 </div>
+                <button type="button" onClick={() => HandleEdit(item)}>Editar</button>
+                <button type="button" onClick={() => HandleDelete(item)}>Eliminar</button>
               </div>
             })
           }
         </div>
       ) : (
-        <div className={styles.addProductForm}>
-          <form>
+        <div >
+          <form className={styles.addProductForm}>
             <InputCustom
-              changeEvent={(e) => setProductName(e.target.value)}
+              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Name: e.target.value })}
               label="Nombre del producto"
-              value=""
+              value={selectedProduct.Name}
             />
             <InputCustom
-              changeEvent={(e) => setProductPrice(e.target.value)}
+              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Price: e.target.value })}
               label="Precio del producto"
-              value=""
+              value={selectedProduct.Price}
             />
             <InputCustom
-              changeEvent={(e) => setProductDescription(e.target.value)}
+              rows={4}
+              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Description: e.target.value })}
               label="Descriptcion del producto"
-              value=""
+              value={selectedProduct.Description}
             />
             <InputCustom
-              changeEvent={(e) => setProductImg(e.target.value)}
+              changeEvent={(e) => setSelectedProduct({ ...selectedProduct, Images: [e.target.value] })}
               label="Imagen del producto"
-              value=""
+              value={selectedProduct.Images[0]}
             />
-            <button type="button" onClick={() => AddProduct()}>
-              Añadir
+            <img src={selectedProduct.Images[0]} />
+            <button type="button" onClick={() => HandleProduct()}>
+              {txtButton}
             </button>
           </form>
         </div>
@@ -103,7 +130,17 @@ const ProductsStyle = createUseStyles({
   },
   button: { alignSelf: "end" },
   content: {},
-  addProductForm: {},
+  addProductForm: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+    "& div": {
+      display: "flex",
+      flexDirection: "column",
+      gap: 15
+    }
+  },
   productList: {
     display: "flex",
   },
