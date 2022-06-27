@@ -1,3 +1,4 @@
+import { Button, Text } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
@@ -59,41 +60,68 @@ export const Products = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        {pageText.Title}
+      <Text h1>GG Shop 🛒</Text>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          width: "100%",
+          backgroundColor: "grey",
+          padding: 20,
+          borderRadius: 20,
+        }}
+      >
+        {categories.length > 0 &&
+          listProductsFiltered.length !== listProducts.length && (
+            <Text h3 className={styles.textCategory} onClick={() => setListProductsFiltered(listProducts)}>
+              {pageText.Categories_All}
+            </Text>
+          )}
+        {categories.map((item: string, index: number) => {
+          return (
+            <Text h3 className={styles.textCategory}          
+              key={index}
+              onClick={() =>
+                setListProductsFiltered(
+                  listProducts.filter((x) => x.Category === item)
+                )
+              }
+            >
+              {item}
+            </Text>
+          );
+        })}
       </div>
-      <div>
-        {
-          categories.length > 0 && listProductsFiltered.length !== listProducts.length && <button type="button" onClick={() => setListProductsFiltered(listProducts)}>{pageText.Categories_All}</button>
-        }
-        {
-
-          categories.map((item: string, index: number) => {
-            return <button type="button" key={index} onClick={() => setListProductsFiltered(listProducts.filter(x => x.Category === item))} >{item}</button>
-          })
-        }
-      </div>
+      <Text h2>{pageText.Title}</Text>
+      {!addingProduct ? (
+        <div className={styles.productList}>
+          {listProductsFiltered &&
+            listProductsFiltered.map((item: Product, index: number) => {
+              return (
+                <ProductCard
+                  handleDelete={HandleDelete}
+                  handleEdit={HandleEdit}
+                  product={item}
+                  key={index}
+                />
+              );
+            })}
+        </div>
+      ) : (
+        <div>
+          <ProductForm
+            isDeleting={isDeleting}
+            callBack={FormCallBack}
+            product={selectedProduct}
+          />
+        </div>
+      )}
       <div className={styles.button}>
-        <button onClick={() => setAddingProduct(!addingProduct)}>
+        <Button onClick={() => setAddingProduct(!addingProduct)}>
           {pageText.BtnCreateProduct}
-        </button>
+        </Button>
       </div>
-      {
-        !addingProduct ? (
-          <div className={styles.productList}>
-            {
-              listProductsFiltered && listProductsFiltered.map((item: Product, index: number) => {
-                return <ProductCard handleDelete={HandleDelete} handleEdit={HandleEdit} product={item} key={index} />
-              })
-            }
-          </div>
-        ) : (
-          <div >
-            <ProductForm isDeleting={isDeleting} callBack={FormCallBack} product={selectedProduct} />
-          </div>
-        )
-      }
-    </div >
+    </div>
   );
 };
 
@@ -101,12 +129,25 @@ const ProductsStyle = createUseStyles({
   container: {
     display: "flex",
     flexDirection: "column",
-    gap: 20
+    gap: 20,
+    width: "100%",
+    padding: 20,
   },
-  button: { alignSelf: "end" },
+  button: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "flex-end",
+    backgroundColor: "transparent",
+    padding: 20,
+  },
+  textCategory: {
+    fontWeight: "bold",
+    "&:hover": { cursor: "pointer", transform: "scale(1.5)" },
+  },
   content: {},
 
   productList: {
     display: "flex",
+    gap: 20,
   },
 });
