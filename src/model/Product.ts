@@ -3,8 +3,8 @@ export interface Product {
     Name: string;
     Price: string;
     Description: string;
-    PurchasedTimes: number;
-    Images: string[]
+    Category: string;
+    Images: string
 }
 
 export const GetEmptyProduct = (): Product => {
@@ -13,7 +13,7 @@ export const GetEmptyProduct = (): Product => {
         Name: '',
         Price: '',
         Description: '',
-        PurchasedTimes: 0,
-        Images: []
+        Category: "",
+        Images: ""
     }
 }

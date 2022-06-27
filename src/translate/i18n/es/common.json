@@ -1,0 +1,17 @@
+{
+    "Products": {
+        "Title": "Listado de products",
+        "BtnCreateProduct": "Crear producto",
+        "Categories_All": "Todas las categorías"
+    },
+    "ProductForm": {
+        "Name": "Nombre del producto",
+        "Description": "Descripción del producto",
+        "Price": "Precio del producto",
+        "Category": "Categoría del producto",
+        "Images": "Imagen del producto",
+        "BtnAdd": "Añadir producto",
+        "BtnEdit": "Actualizar producto",
+        "BtnDelete": "Eliminar producto"
+    }
+}

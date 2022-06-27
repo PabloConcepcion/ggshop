@@ -1,5 +1,5 @@
 import React from 'react';
-import { Products } from './Admin/Products';
+import { Products } from './Products';
 
 export const Home = () => {
     return <div>
