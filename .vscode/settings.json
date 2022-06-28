@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/dc5f6e87-a26d-46e3-a939-7d74e40b62c8/microsoft.web/sites/subscriptions/dc5f6e87-a26d-46e3-a939-7d74e40b62c8/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.Web/sites/ggshop",
+    "appService.deploySubpath": "build"
+}

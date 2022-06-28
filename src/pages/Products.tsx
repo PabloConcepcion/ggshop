@@ -28,7 +28,7 @@ export const Products = () => {
     const categories = [];
 
     list.forEach((item: Product) => {
-      if (item.Category && item.Category.length > 0) {
+      if (item.Category && item.Category.length > 0 && categories.indexOf(item.Category) < 0) {
         categories.push(item.Category);
       }
     })
@@ -79,7 +79,7 @@ export const Products = () => {
           )}
         {categories.map((item: string, index: number) => {
           return (
-            <Text h3 className={styles.textCategory}          
+            <Text h3 className={styles.textCategory}
               key={index}
               onClick={() =>
                 setListProductsFiltered(
@@ -149,5 +149,6 @@ const ProductsStyle = createUseStyles({
   productList: {
     display: "flex",
     gap: 20,
+    flexWrap: "wrap"
   },
 });
