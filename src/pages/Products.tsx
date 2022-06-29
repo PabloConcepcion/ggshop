@@ -68,11 +68,13 @@ export const Products = () => {
     isDeleting={isDeleting}
     callBack={FormCallBack}
     product={selectedProduct}
+
   />;
 
   const handleClick = () => {
     setAddingProduct(!addingProduct);
     setIsDeleting(false);
+    setSelectedProduct(GetEmptyProduct());
   }
   return (
     <div className={styles.container}>

@@ -44,7 +44,7 @@ export const ProductForm = (props: IProductFormProps) => {
   }
   const emptyProduct = GetEmptyProduct();
   const productFields = Object.keys(emptyProduct);
-  return (
+  return (<div className={styles.formContainer}>
     <form className={styles.addProductForm}>
       {
         productFields.map((field: string, index: number) => {
@@ -83,12 +83,17 @@ export const ProductForm = (props: IProductFormProps) => {
         {txtButton}
       </Button>
     </form>
+  </div>
+
+
   )
 }
 
 
 const ProductFormStyle = createUseStyles({
+  formContainer: {
 
+  },
   addProductForm: {
     padding: 20,
     display: "flex",

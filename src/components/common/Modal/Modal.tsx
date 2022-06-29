@@ -25,7 +25,7 @@ export const ModalComponent = (props: IModalProps) => {
             aria-labelledby="modal-title"
             open={visible || props.visible}
             onClose={() => closeHandler()}
-            className={styles.container}
+            className={styles.containerModal}
             width="100%"
         >
             <Modal.Header>
@@ -33,7 +33,7 @@ export const ModalComponent = (props: IModalProps) => {
                     {props.title}
                 </Text>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className={styles.modalBody}>
                 {props.body}
             </Modal.Body>
             <Modal.Footer>
@@ -47,7 +47,10 @@ export const ModalComponent = (props: IModalProps) => {
 
 
 const ModalStyle = createUseStyles({
-    container: {
+    containerModal: {
+
+    },
+    modalBody: {
 
     }
 })
