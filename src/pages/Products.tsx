@@ -1,10 +1,15 @@
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Text } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import { GetProducts } from "../api/products";
-import { ProductCard } from "../components/ProductCard/ProductCard";
+import { Badge } from "../components/Badge/Badge";
+import { ModalComponent } from "../components/common/Modal/Modal";
+import { Header } from "../components/Header/Header";
 import { ProductForm } from "../components/ProductForm/ProductForm";
+import { ProductList } from "../components/ProductList/ProductList";
 import { GetEmptyProduct, Product } from "../model/Product";
 
 export const Products = () => {
@@ -52,75 +57,54 @@ export const Products = () => {
     setIsDeleting(!isDeleting);
   }
 
+
   const FormCallBack = () => {
     GetProductsList();
     setAddingProduct(!addingProduct);
     setSelectedProduct(GetEmptyProduct());
   }
+  const modalTitle = pageText.Title;
+  const modalBody = <ProductForm
+    isDeleting={isDeleting}
+    callBack={FormCallBack}
+    product={selectedProduct}
+  />;
 
+  const handleClick = () => {
+    setAddingProduct(!addingProduct);
+    setIsDeleting(false);
+  }
   return (
     <div className={styles.container}>
-      <Text h1>GG Shop 🛒</Text>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          width: "100%",
-          backgroundColor: "grey",
-          padding: 20,
-          borderRadius: 20,
-        }}
-      >
-        {categories.length > 0 &&
-          listProductsFiltered.length !== listProducts.length && (
-            <Text h3 className={styles.textCategory} onClick={() => setListProductsFiltered(listProducts)}>
-              {pageText.Categories_All}
-            </Text>
-          )}
-        {categories.map((item: string, index: number) => {
-          return (
-            <Text h3 className={styles.textCategory}
-              key={index}
-              onClick={() =>
+      <ModalComponent visible={addingProduct} onHide={handleClick} title={modalTitle} body={modalBody} />
+      <div className="header">
+        <Header />
+        <div className={styles.button} title={pageText.BtnCreateProduct}>
+          <button onClick={() => handleClick()}>
+            <FontAwesomeIcon icon={faAdd} />
+          </button>
+        </div>
+        <div
+          className={styles.categories}
+        >
+          {categories.length > 0 &&
+            listProductsFiltered.length !== listProducts.length && (
+              <Badge text={pageText.Categories_All} onClick={() => setListProductsFiltered(listProducts)} />
+            )}
+          {categories.map((item: string, index: number) => {
+            return (
+              <Badge key={index} text={item} onClick={() =>
                 setListProductsFiltered(
                   listProducts.filter((x) => x.Category === item)
-                )
-              }
-            >
-              {item}
-            </Text>
-          );
-        })}
+                )} />
+            );
+          })}
+
+        </div>
       </div>
+
       <Text h2>{pageText.Title}</Text>
-      {!addingProduct ? (
-        <div className={styles.productList}>
-          {listProductsFiltered &&
-            listProductsFiltered.map((item: Product, index: number) => {
-              return (
-                <ProductCard
-                  handleDelete={HandleDelete}
-                  handleEdit={HandleEdit}
-                  product={item}
-                  key={index}
-                />
-              );
-            })}
-        </div>
-      ) : (
-        <div>
-          <ProductForm
-            isDeleting={isDeleting}
-            callBack={FormCallBack}
-            product={selectedProduct}
-          />
-        </div>
-      )}
-      <div className={styles.button}>
-        <Button onClick={() => setAddingProduct(!addingProduct)}>
-          {pageText.BtnCreateProduct}
-        </Button>
-      </div>
+      <ProductList handleDelete={HandleDelete} handleEdit={HandleEdit} productList={listProductsFiltered} />
     </div>
   );
 };
@@ -134,11 +118,18 @@ const ProductsStyle = createUseStyles({
     padding: 20,
   },
   button: {
+    boxShadow: "0px 0px 4px grey",
+    width: "fit-content",
     display: "flex",
-    width: "100%",
-    justifyContent: "flex-end",
-    backgroundColor: "transparent",
-    padding: 20,
+    borderRadius: 20,
+    margin: 10,
+    float: "right",
+
+    "& button": {
+      border: "none",
+      backgroundColor: "transparent",
+      cursor: "pointer",
+    }
   },
   textCategory: {
     fontWeight: "bold",
@@ -146,9 +137,9 @@ const ProductsStyle = createUseStyles({
   },
   content: {},
 
-  productList: {
+
+  categories: {
     display: "flex",
-    gap: 20,
-    flexWrap: "wrap"
-  },
+    gap: 20
+  }
 });

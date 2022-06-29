@@ -31,24 +31,14 @@ export const ProductCard = (props: IProductCardProps) => {
   // </div>
 
   return (
-    <Card css={{ w: "500px", h: "500px" }}>
-      <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-        <Col>
-          <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
-            {props.product.Category}
-          </Text>
-          <Text h3 color="black">
-            {props.product.Name}
-          </Text>
-        </Col>
-      </Card.Header>
+    <Card css={{ w: "400px", h: "400px" }}>
       <Card.Body css={{ p: 0 }}>
         <Card.Image
           src={props.product.Images}
           width="100%"
           height="100%"
           objectFit="cover"
-          alt="Card example background"   
+          alt="Card example background"
         />
       </Card.Body>
       <Card.Footer
@@ -63,6 +53,12 @@ export const ProductCard = (props: IProductCardProps) => {
       >
         <Row>
           <Col>
+            <Text size={12} weight="bold" transform="uppercase" color="#252525">
+              {props.product.Category}
+            </Text>
+            <Text h3 color="black">
+              {props.product.Name}
+            </Text>
             <Text h2 color="#000">
               {props.product.Price}
             </Text>
@@ -71,29 +67,29 @@ export const ProductCard = (props: IProductCardProps) => {
             </Text>
           </Col>
           <Col className={styles.columnOptions}>
-              <Tooltip content={"Editar producto"} rounded color="warning">
-                <Button
-                  flat
-                  auto
-                  rounded
-                  color="warning"
-                  onClick={() => props.handleEdit(props.product)}
-                >
-                  <FontAwesomeIcon icon={faPen} color="warning" />
-                </Button>
-              </Tooltip>
-              <Tooltip content={"Eliminar producto"} rounded color="error">
-                <Button
-                  flat
-                  auto
-                  rounded
-                  color="error"
-                  css={{marginTop: 10}}
-                  onClick={() => props.handleDelete(props.product)}
-                >
-                  <FontAwesomeIcon icon={faTrash} color="error" />
-                </Button>
-              </Tooltip>
+            <Tooltip content={"Editar producto"} rounded color="warning">
+              <Button
+                flat
+                auto
+                rounded
+                color="warning"
+                onClick={() => props.handleEdit(props.product)}
+              >
+                <FontAwesomeIcon icon={faPen} color="warning" />
+              </Button>
+            </Tooltip>
+            <Tooltip content={"Eliminar producto"} rounded color="error">
+              <Button
+                flat
+                auto
+                rounded
+                color="error"
+                css={{ marginTop: 10 }}
+                onClick={() => props.handleDelete(props.product)}
+              >
+                <FontAwesomeIcon icon={faTrash} color="error" />
+              </Button>
+            </Tooltip>
           </Col>
         </Row>
       </Card.Footer>

@@ -1,3 +1,4 @@
+import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
@@ -78,9 +79,9 @@ export const ProductForm = (props: IProductFormProps) => {
         value={selectedProduct.Images[0]}
       /> */}
       <img className={styles.imgProduct} src={selectedProduct.Images[0]} />
-      <button type="button" onClick={() => HandleProduct()}>
+      <Button type="button" onClick={() => HandleProduct()}>
         {txtButton}
-      </button>
+      </Button>
     </form>
   )
 }
