@@ -9,7 +9,7 @@ import { InputCustom } from "../common/InputCustom/InputCustom"
 interface IProductFormProps {
   product: Product,
   callBack: any;
-  isDeleting: boolean;
+  isDeleting?: boolean;
 }
 
 export const ProductForm = (props: IProductFormProps) => {

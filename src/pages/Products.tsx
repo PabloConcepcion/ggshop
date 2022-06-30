@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import { GetProducts } from "../api/products";
 import { Badge } from "../components/Badge/Badge";
+import { CategoryList } from "../components/CategoryList/CategoryList";
 import { ModalComponent } from "../components/common/Modal/Modal";
 import { Header } from "../components/Header/Header";
 import { ProductForm } from "../components/ProductForm/ProductForm";
@@ -20,6 +21,7 @@ export const Products = () => {
   const [listProductsFiltered, setListProductsFiltered] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState<Product>(GetEmptyProduct());
   const [isDeleting, setIsDeleting] = useState(false);
+  const [reload, setReload] = useState(false);
   const [categories, setCategories] = useState([]);
 
   const styles = ProductsStyle();
@@ -44,9 +46,15 @@ export const Products = () => {
   useEffect(() => {
     if (!listProducts) {
       GetProductsList();
-
     }
   })
+
+  useEffect(() => {
+    if (reload) {
+      GetProductsList();
+      setReload(false);
+    }
+  }, [reload])
   const HandleEdit = (product: Product) => {
     setSelectedProduct(product);
     setAddingProduct(!addingProduct);
@@ -55,6 +63,7 @@ export const Products = () => {
   const HandleDelete = (product: Product) => {
     HandleEdit(product);
     setIsDeleting(!isDeleting);
+    setAddingProduct(!addingProduct);
   }
 
 
@@ -72,38 +81,14 @@ export const Products = () => {
   />;
 
   const handleClick = () => {
-    setAddingProduct(!addingProduct);
+    setAddingProduct(false);
     setIsDeleting(false);
     setSelectedProduct(GetEmptyProduct());
   }
   return (
     <div className={styles.container}>
       <ModalComponent visible={addingProduct} onHide={handleClick} title={modalTitle} body={modalBody} />
-      <div className="header">
-        <Header />
-        <div className={styles.button} title={pageText.BtnCreateProduct}>
-          <button onClick={() => handleClick()}>
-            <FontAwesomeIcon icon={faAdd} />
-          </button>
-        </div>
-        <div
-          className={styles.categories}
-        >
-          {categories.length > 0 &&
-            listProductsFiltered.length !== listProducts.length && (
-              <Badge text={pageText.Categories_All} onClick={() => setListProductsFiltered(listProducts)} />
-            )}
-          {categories.map((item: string, index: number) => {
-            return (
-              <Badge key={index} text={item} onClick={() =>
-                setListProductsFiltered(
-                  listProducts.filter((x) => x.Category === item)
-                )} />
-            );
-          })}
-
-        </div>
-      </div>
+      <Header listProduct={listProducts} setListProductsFiltered={setListProductsFiltered} setReload={setReload} />
 
       <Text h2>{pageText.Title}</Text>
       <ProductList handleDelete={HandleDelete} handleEdit={HandleEdit} productList={listProductsFiltered} />
@@ -118,20 +103,6 @@ const ProductsStyle = createUseStyles({
     gap: 20,
     width: "100%",
     padding: 20,
-  },
-  button: {
-    boxShadow: "0px 0px 4px grey",
-    width: "fit-content",
-    display: "flex",
-    borderRadius: 20,
-    margin: 10,
-    float: "right",
-
-    "& button": {
-      border: "none",
-      backgroundColor: "transparent",
-      cursor: "pointer",
-    }
   },
   textCategory: {
     fontWeight: "bold",
