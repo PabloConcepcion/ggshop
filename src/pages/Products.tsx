@@ -1,12 +1,8 @@
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Text } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
-import { GetProducts } from "../api/products";
-import { Badge } from "../components/Badge/Badge";
-import { CategoryList } from "../components/CategoryList/CategoryList";
+import { DeleteProduct, GetProducts } from "../api/products";
 import { ModalComponent } from "../components/common/Modal/Modal";
 import { Header } from "../components/Header/Header";
 import { ProductForm } from "../components/ProductForm/ProductForm";
@@ -22,7 +18,9 @@ export const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>(GetEmptyProduct());
   const [isDeleting, setIsDeleting] = useState(false);
   const [reload, setReload] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalBody, setModalBody] = useState(<></>);
+  const [modalFooter, setModalFooter] = useState(<></>);
 
   const styles = ProductsStyle();
 
@@ -30,23 +28,19 @@ export const Products = () => {
     const list = await GetProducts(null);
     setListProducts(list);
     setListProductsFiltered(list);
-
-
-    const categories = [];
-
-    list.forEach((item: Product) => {
-      if (item.Category && item.Category.length > 0 && categories.indexOf(item.Category) < 0) {
-        categories.push(item.Category);
-      }
-    })
-    if (categories.length > 0) {
-      setCategories(categories);
-    }
   }
   useEffect(() => {
     if (!listProducts) {
       GetProductsList();
+      setModalTitle(pageText.Title);
+      setModalBody(<ProductForm
+        isDeleting={isDeleting}
+        callBack={FormCallBack}
+        product={selectedProduct}
+
+      />)
     }
+
   })
 
   useEffect(() => {
@@ -61,24 +55,31 @@ export const Products = () => {
   }
 
   const HandleDelete = (product: Product) => {
-    HandleEdit(product);
-    setIsDeleting(!isDeleting);
+    setModalTitle(t("ProductForm.BtnDelete"));
+    setModalBody(<>
+      Te dispones a eliminar el producto {product.Name}<br />
+      Deseas continuar?
+    </>)
+    setModalFooter(<>
+      <Button onClick={() => RemoveProduct(product)} >
+        Eliminar {product.Name}
+      </Button>
+    </>)
+
     setAddingProduct(!addingProduct);
   }
 
+
+  const RemoveProduct = async (product: Product) => {
+    await DeleteProduct(product);
+    FormCallBack();
+  }
 
   const FormCallBack = () => {
     GetProductsList();
-    setAddingProduct(!addingProduct);
+    setAddingProduct(false);
     setSelectedProduct(GetEmptyProduct());
   }
-  const modalTitle = pageText.Title;
-  const modalBody = <ProductForm
-    isDeleting={isDeleting}
-    callBack={FormCallBack}
-    product={selectedProduct}
-
-  />;
 
   const handleClick = () => {
     setAddingProduct(false);
@@ -87,10 +88,8 @@ export const Products = () => {
   }
   return (
     <div className={styles.container}>
-      <ModalComponent visible={addingProduct} onHide={handleClick} title={modalTitle} body={modalBody} />
+      <ModalComponent visible={addingProduct} onHide={handleClick} title={modalTitle} body={modalBody} actions={modalFooter} />
       <Header listProduct={listProducts} setListProductsFiltered={setListProductsFiltered} setReload={setReload} />
-
-      <Text h2>{pageText.Title}</Text>
       <ProductList handleDelete={HandleDelete} handleEdit={HandleEdit} productList={listProductsFiltered} />
     </div>
   );

@@ -31,8 +31,6 @@ export const Header = (props: IHeaderProps) => {
 
 
     return <div className={styles.headerContainer}>
-
-
         <ModalComponent visible={showModal} onHide={setShowModal} title={modalTitle} body={modalBody} />
         <div className="header">
             <Text h1>{t("Header.Title")} </Text>
