@@ -17,7 +17,7 @@ export const ProductList = (props: IProductList) => {
     const { t } = useTranslation();
     const pageText: any = t("Products", { returnObjects: true });
     return <>
-        <Text h2>{pageText.Title}</Text>
+        {/* <Text h2>{pageText.Title}</Text> */}
         <div className={styles.productList}>
             {props.productList &&
                 props.productList.map((item: Product, index: number) => {
@@ -38,6 +38,7 @@ const ProductListStyle = createUseStyles({
     productList: {
         display: "flex",
         gap: 20,
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        width: "100%"
     },
 })

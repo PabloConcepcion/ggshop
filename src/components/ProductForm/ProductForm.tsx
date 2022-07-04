@@ -23,7 +23,6 @@ export const ProductForm = (props: IProductFormProps) => {
     } else {
       if (selectedProduct.Id.length > 0) {
         await UpdateProduct(selectedProduct);
-
       } else {
         await NewProduct(selectedProduct);
       }

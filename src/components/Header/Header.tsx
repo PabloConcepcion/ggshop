@@ -1,6 +1,6 @@
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Text } from "@nextui-org/react";
+import { Button, Input, Text } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
@@ -8,6 +8,7 @@ import { GetEmptyProduct, Product } from "../../model/Product";
 import { CategoryList } from "../CategoryList/CategoryList";
 import { ModalComponent } from "../common/Modal/Modal";
 import { ProductForm } from "../ProductForm/ProductForm";
+import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
 interface IHeaderProps {
     setReload: any;
@@ -30,26 +31,60 @@ export const Header = (props: IHeaderProps) => {
     />;
 
 
-    return <div className={styles.headerContainer}>
-        <ModalComponent visible={showModal} onHide={setShowModal} title={modalTitle} body={modalBody} />
-        <div className="header">
-            <Text h1>{t("Header.Title")} </Text>
-            <div className={styles.button} title={pageText.BtnCreateProduct}>
-                <button onClick={() => setShowModal(true)}>
-                    <FontAwesomeIcon icon={faAdd} />
-                </button>
-            </div>
-            <CategoryList className={styles.categories} onClickCategory={props.setListProductsFiltered} productList={props.listProduct} />
+    return (
+      <div className={styles.headerContainer}>
+        <ModalComponent
+          visible={showModal}
+          onHide={setShowModal}
+          title={modalTitle}
+          body={modalBody}
+        />
+        <div className={styles.header}>
+          <Text h1>{t("Header.Title")} </Text>
+          <Input
+            clearable
+            contentRightStyling={false}
+            placeholder="Buscar un producto..."
+            css={{width: 600, marginLeft: 50}}
+            contentRight={
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                style={{ padding: 10 }}
+              />
+            }
+          />
+          <div className={styles.button} title={pageText.BtnCreateProduct}>
+            <button onClick={() => setShowModal(true)}>
+              <FontAwesomeIcon icon={faAdd} />
+            </button>
+          </div>         
+          {/* <CategoryList className={styles.categories} onClickCategory={props.setListProductsFiltered} productList={props.listProduct} /> */}
         </div>
-    </div>
+      </div>
+    );
 
 }
 
 
 const HeaderStyle = createUseStyles({
     headerContainer: {
-
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "row",
+        padding: 20,
+        backgroundColor: "white"
     },
+
+    header: {
+        // backgroundColor: "#ffff7a",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        padding: 20,
+        borderRadius: 15
+    },
+
     button: {
         boxShadow: "0px 0px 4px grey",
         width: "fit-content",

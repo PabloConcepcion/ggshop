@@ -1,13 +1,16 @@
-import { Button } from "@nextui-org/react";
+import { Button, Card, gray } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import { DeleteProduct, GetProducts } from "../api/products";
+import { CategoryList } from "../components/CategoryList/CategoryList";
 import { ModalComponent } from "../components/common/Modal/Modal";
 import { Header } from "../components/Header/Header";
 import { ProductForm } from "../components/ProductForm/ProductForm";
 import { ProductList } from "../components/ProductList/ProductList";
 import { GetEmptyProduct, Product } from "../model/Product";
+import { faBars} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Products = () => {
   const { t } = useTranslation();
@@ -37,10 +40,8 @@ export const Products = () => {
         isDeleting={isDeleting}
         callBack={FormCallBack}
         product={selectedProduct}
-
       />)
     }
-
   })
 
   useEffect(() => {
@@ -88,9 +89,38 @@ export const Products = () => {
   }
   return (
     <div className={styles.container}>
-      <ModalComponent visible={addingProduct} onHide={handleClick} title={modalTitle} body={modalBody} actions={modalFooter} />
-      <Header listProduct={listProducts} setListProductsFiltered={setListProductsFiltered} setReload={setReload} />
-      <ProductList handleDelete={HandleDelete} handleEdit={HandleEdit} productList={listProductsFiltered} />
+      <ModalComponent
+        visible={addingProduct}
+        onHide={handleClick}
+        title={modalTitle}
+        body={modalBody}
+        actions={modalFooter}
+      />
+      <Header
+        listProduct={listProducts}
+        setListProductsFiltered={setListProductsFiltered}
+        setReload={setReload}
+      />
+      <div className={styles.home}>
+        <Card css={{ width: "20%" }}>
+          <Card.Header className={styles.categoriesTitle}>
+              <FontAwesomeIcon icon={faBars} /> 
+              <h4>Categorías</h4>
+          </Card.Header>
+          <Card.Body>
+            <CategoryList
+              className={styles.categories}
+              onClickCategory={setListProductsFiltered}
+              productList={listProducts}
+            />
+          </Card.Body>
+        </Card>
+        <ProductList
+          handleDelete={HandleDelete}
+          handleEdit={HandleEdit}
+          productList={listProductsFiltered}
+        />
+      </div>
     </div>
   );
 };
@@ -99,9 +129,8 @@ const ProductsStyle = createUseStyles({
   container: {
     display: "flex",
     flexDirection: "column",
-    gap: 20,
     width: "100%",
-    padding: 20,
+    backgroundColor: "#dfdfdf"
   },
   textCategory: {
     fontWeight: "bold",
@@ -109,9 +138,22 @@ const ProductsStyle = createUseStyles({
   },
   content: {},
 
-
   categories: {
     display: "flex",
+    flexDirection: "column",
+    gap: 20
+  },
+
+  categoriesTitle: {
+    display: "flex",
+    alignContent: "center",
+    gap: 10
+  },
+
+  home: {
+    display: "flex",
+    padding: 20,
     gap: 20
   }
+
 });
