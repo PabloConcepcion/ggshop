@@ -55,7 +55,7 @@ export const Header = (props: IHeaderProps) => {
           />
           <div className={styles.button} title={pageText.BtnCreateProduct}>
             <button onClick={() => setShowModal(true)}>
-              <FontAwesomeIcon icon={faAdd} />
+              <FontAwesomeIcon icon={faAdd}/>
             </button>
           </div>         
           {/* <CategoryList className={styles.categories} onClickCategory={props.setListProductsFiltered} productList={props.listProduct} /> */}

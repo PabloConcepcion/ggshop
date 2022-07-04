@@ -1,4 +1,4 @@
-import { Button, Card, gray } from "@nextui-org/react";
+import { Button, Card, gray, Row } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
@@ -9,7 +9,7 @@ import { Header } from "../components/Header/Header";
 import { ProductForm } from "../components/ProductForm/ProductForm";
 import { ProductList } from "../components/ProductList/ProductList";
 import { GetEmptyProduct, Product } from "../model/Product";
-import { faBars} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBagShopping, faRankingStar} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Products = () => {
@@ -102,10 +102,11 @@ export const Products = () => {
         setReload={setReload}
       />
       <div className={styles.home}>
-        <Card css={{ width: "20%" }}>
+        {/* ------ Categorías ------ */}
+        <Card css={{width: "500px" }}>
           <Card.Header className={styles.categoriesTitle}>
-              <FontAwesomeIcon icon={faBars} /> 
-              <h4>Categorías</h4>
+              <FontAwesomeIcon icon={faBars} style={{height: 20}}/> 
+              <h3 style={{margin: 0}}>Categorías</h3>
           </Card.Header>
           <Card.Body>
             <CategoryList
@@ -115,11 +116,38 @@ export const Products = () => {
             />
           </Card.Body>
         </Card>
+        {/* ------ Listado de productos ------ */}
         <ProductList
           handleDelete={HandleDelete}
           handleEdit={HandleEdit}
           productList={listProductsFiltered}
         />
+         {/* ------ Productos "trending/top ventas" ------ */}
+        <Card css={{width: "500px" }}> 
+          <Card.Header className={styles.categoriesTitle}>
+              <FontAwesomeIcon icon={faRankingStar} style={{height: 20}}/> 
+              <h3 style={{margin: 0}}>Top ventas</h3>
+          </Card.Header>
+          <Card.Body css={{display: "flex", gap: 20, padding: 20, flexWrap: "wrap"}}>
+            {listProducts && listProducts.slice(0,5).map(item => (
+              <Card isHoverable isPressable variant="bordered">
+                <Card.Body css={{ p: 0 }}>
+                  <Card.Image
+                    src={item.Images}
+                    objectFit="cover"
+                    width="100%"
+                    height={140}
+                    alt={item.title} />
+                </Card.Body>
+                <Card.Footer css={{ justifyItems: "flex-start", backgroundColor: "Gray" }}>
+                  <Row wrap="wrap" justify="center" align="center">
+                    <h6>{item.Name}</h6>
+                  </Row> 
+                </Card.Footer>
+              </Card>
+            ))}
+          </Card.Body>
+        </Card>
       </div>
     </div>
   );
@@ -130,7 +158,8 @@ const ProductsStyle = createUseStyles({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    backgroundColor: "#dfdfdf"
+    backgroundColor: "#dfdfdf",
+    height: "100vh"
   },
   textCategory: {
     fontWeight: "bold",

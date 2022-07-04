@@ -17,13 +17,13 @@ export const Badge = (props: IBadgeProps) => {
 }
 const BadgeStyles = createUseStyles({
     container: {
-        border: "solid 1px grey",
+        // border: "solid 1px grey",
         borderRadius: 50,
         padding: "0px 10px",
         cursor: "pointer"
     },
     badgeText: {
-        fontSize: 13,
+        fontSize: 15,
         textTransform: "uppercase"
     }
 })

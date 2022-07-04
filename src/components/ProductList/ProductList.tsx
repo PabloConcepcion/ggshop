@@ -16,22 +16,26 @@ export const ProductList = (props: IProductList) => {
 
     const { t } = useTranslation();
     const pageText: any = t("Products", { returnObjects: true });
-    return <>
-        {/* <Text h2>{pageText.Title}</Text> */}
-        <div className={styles.productList}>
+    return (
+      <>
+        <div>
+          <Text h2>{pageText.Title}</Text>
+          <div className={styles.productList}>
             {props.productList &&
-                props.productList.map((item: Product, index: number) => {
-                    return (
-                        <ProductCard
-                            handleDelete={props.handleDelete}
-                            handleEdit={props.handleEdit}
-                            product={item}
-                            key={index}
-                        />
-                    );
-                })}
+              props.productList.map((item: Product, index: number) => {
+                return (
+                  <ProductCard
+                    handleDelete={props.handleDelete}
+                    handleEdit={props.handleEdit}
+                    product={item}
+                    key={index}
+                  />
+                );
+              })}
+          </div>
         </div>
-    </>
+      </>
+    );
 }
 
 const ProductListStyle = createUseStyles({
@@ -39,6 +43,7 @@ const ProductListStyle = createUseStyles({
         display: "flex",
         gap: 20,
         flexWrap: "wrap",
-        width: "100%"
+        width: "100%",
+        marginTop: 20
     },
 })
