@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import { Product } from "../../model/Product"
 import { ProductCard } from "../ProductCard/ProductCard";
+import { faBagShopping } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IProductList {
     productList: Product[];
@@ -19,7 +21,10 @@ export const ProductList = (props: IProductList) => {
     return (
       <>
         <div>
-          <Text h2>{pageText.Title}</Text>
+          <div className={styles.title}>
+            <FontAwesomeIcon icon={faBagShopping} style={{ height: 40 }} />
+            <Text h2 style={{margin:0}}>{pageText.Title}</Text>
+          </div>
           <div className={styles.productList}>
             {props.productList &&
               props.productList.map((item: Product, index: number) => {
@@ -45,5 +50,11 @@ const ProductListStyle = createUseStyles({
         flexWrap: "wrap",
         width: "100%",
         marginTop: 20
+    },
+
+    title: {
+      display: "flex",
+      alignContent: "center",
+      gap: 10
     },
 })

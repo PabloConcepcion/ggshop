@@ -175,7 +175,7 @@ const ProductsStyle = createUseStyles({
 
   categoriesTitle: {
     display: "flex",
-    alignContent: "center",
+    alignItems: "center",
     gap: 10
   },
 
