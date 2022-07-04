@@ -1,3 +1,4 @@
+import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
@@ -8,7 +9,7 @@ import { InputCustom } from "../common/InputCustom/InputCustom"
 interface IProductFormProps {
   product: Product,
   callBack: any;
-  isDeleting: boolean;
+  isDeleting?: boolean;
 }
 
 export const ProductForm = (props: IProductFormProps) => {
@@ -43,7 +44,7 @@ export const ProductForm = (props: IProductFormProps) => {
   }
   const emptyProduct = GetEmptyProduct();
   const productFields = Object.keys(emptyProduct);
-  return (
+  return (<div className={styles.formContainer}>
     <form className={styles.addProductForm}>
       {
         productFields.map((field: string, index: number) => {
@@ -78,16 +79,21 @@ export const ProductForm = (props: IProductFormProps) => {
         value={selectedProduct.Images[0]}
       /> */}
       <img className={styles.imgProduct} src={selectedProduct.Images[0]} />
-      <button type="button" onClick={() => HandleProduct()}>
+      <Button type="button" onClick={() => HandleProduct()}>
         {txtButton}
-      </button>
+      </Button>
     </form>
+  </div>
+
+
   )
 }
 
 
 const ProductFormStyle = createUseStyles({
+  formContainer: {
 
+  },
   addProductForm: {
     padding: 20,
     display: "flex",

@@ -13,5 +13,8 @@
         "BtnAdd": "Añadir producto",
         "BtnEdit": "Actualizar producto",
         "BtnDelete": "Eliminar producto"
+    },
+    "Header": {
+        "Title": "GG Shop 🛒"
     }
 }
