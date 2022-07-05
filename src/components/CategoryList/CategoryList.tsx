@@ -35,7 +35,6 @@ export const CategoryList = (props: ICategoryListProps) => {
 
 
     const HandleClick = (category: string) => {
-        console.log(category);
         props.onClickCategory(props.productList.filter((x) => x.Category === category))
         setSelCategory(category);
     }

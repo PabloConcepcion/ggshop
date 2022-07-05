@@ -9,8 +9,9 @@ import { Header } from "../components/Header/Header";
 import { ProductForm } from "../components/ProductForm/ProductForm";
 import { ProductList } from "../components/ProductList/ProductList";
 import { GetEmptyProduct, Product } from "../model/Product";
-import { faBars, faBagShopping, faRankingStar} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBagShopping, faRankingStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CategoryPanel } from "../components/CategoryPanel/CategoryPanel";
 
 export const Products = () => {
   const { t } = useTranslation();
@@ -53,6 +54,10 @@ export const Products = () => {
   const HandleEdit = (product: Product) => {
     setSelectedProduct(product);
     setAddingProduct(!addingProduct);
+    setModalBody(<ProductForm
+      callBack={FormCallBack}
+      product={product}
+    />)
   }
 
   const HandleDelete = (product: Product) => {
@@ -102,34 +107,22 @@ export const Products = () => {
         setReload={setReload}
       />
       <div className={styles.home}>
-        {/* ------ Categorías ------ */}
-        <Card css={{width: "500px" }}>
-          <Card.Header className={styles.categoriesTitle}>
-              <FontAwesomeIcon icon={faBars} style={{height: 20}}/> 
-              <h3 style={{margin: 0}}>Categorías</h3>
-          </Card.Header>
-          <Card.Body>
-            <CategoryList
-              className={styles.categories}
-              onClickCategory={setListProductsFiltered}
-              productList={listProducts}
-            />
-          </Card.Body>
-        </Card>
+        <CategoryPanel listProduct={listProducts}
+          setListProductsFiltered={setListProductsFiltered} />
         {/* ------ Listado de productos ------ */}
         <ProductList
           handleDelete={HandleDelete}
           handleEdit={HandleEdit}
           productList={listProductsFiltered}
         />
-         {/* ------ Productos "trending/top ventas" ------ */}
-        <Card css={{width: "500px" }}> 
+        {/* ------ Productos "trending/top ventas" ------ */}
+        <Card css={{ minWidth: "250px" }}>
           <Card.Header className={styles.categoriesTitle}>
-              <FontAwesomeIcon icon={faRankingStar} style={{height: 20}}/> 
-              <h3 style={{margin: 0}}>Top ventas</h3>
+            <FontAwesomeIcon icon={faRankingStar} style={{ height: 20 }} />
+            <h3 style={{ margin: 0 }}>Top ventas</h3>
           </Card.Header>
-          <Card.Body css={{display: "flex", gap: 20, padding: 20, flexWrap: "wrap"}}>
-            {listProducts && listProducts.slice(0,5).map(item => (
+          <Card.Body css={{ display: "flex", gap: 20, padding: 20, flexWrap: "wrap" }}>
+            {listProducts && listProducts.slice(0, 5).map(item => (
               <Card isHoverable isPressable variant="bordered">
                 <Card.Body css={{ p: 0 }}>
                   <Card.Image
@@ -142,7 +135,7 @@ export const Products = () => {
                 <Card.Footer css={{ justifyItems: "flex-start", backgroundColor: "Gray" }}>
                   <Row wrap="wrap" justify="center" align="center">
                     <h6>{item.Name}</h6>
-                  </Row> 
+                  </Row>
                 </Card.Footer>
               </Card>
             ))}
