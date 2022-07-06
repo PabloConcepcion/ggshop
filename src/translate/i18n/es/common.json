@@ -12,9 +12,17 @@
         "Images": "Imagen del producto",
         "BtnAdd": "Añadir producto",
         "BtnEdit": "Actualizar producto",
-        "BtnDelete": "Eliminar producto"
+        "BtnDelete": "Eliminar producto",
+        "DeleteModalDescription": "Te dispones a eliminar el producto {0}<br />¿Deseas continuar?"
     },
     "Header": {
-        "Title": "GG Shop 🛒"
+        "Title": "GG Shop 🛒",
+        "Placeholder": "Buscar un producto..."
+    },
+    "Category": {
+        "Title": "Categorías"
+    },
+    "BestSellers": {
+        "Title": "Top ventas"
     }
 }

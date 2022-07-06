@@ -1,17 +1,15 @@
-import { Button, Card, gray, Row } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import { DeleteProduct, GetProducts } from "../api/products";
-import { CategoryList } from "../components/CategoryList/CategoryList";
 import { ModalComponent } from "../components/common/Modal/Modal";
 import { Header } from "../components/Header/Header";
-import { ProductForm } from "../components/ProductForm/ProductForm";
+import { ProductForm } from "../components/ProductList/ProductForm/ProductForm";
 import { ProductList } from "../components/ProductList/ProductList";
 import { GetEmptyProduct, Product } from "../model/Product";
-import { faBars, faBagShopping, faRankingStar } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CategoryPanel } from "../components/CategoryPanel/CategoryPanel";
+import { BestSeller } from "../components/BestSellers/BestSeller";
 
 export const Products = () => {
   const { t } = useTranslation();
@@ -19,6 +17,7 @@ export const Products = () => {
   const [addingProduct, setAddingProduct] = useState(false);
   const [listProducts, setListProducts] = useState(null);
   const [listProductsFiltered, setListProductsFiltered] = useState(null);
+  const [bestSellers, setBestSellers] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState<Product>(GetEmptyProduct());
   const [isDeleting, setIsDeleting] = useState(false);
   const [reload, setReload] = useState(false);
@@ -32,7 +31,10 @@ export const Products = () => {
     const list = await GetProducts(null);
     setListProducts(list);
     setListProductsFiltered(list);
+    setBestSellers(list.slice(list.length / 2, list.length - 1));
+
   }
+
   useEffect(() => {
     if (!listProducts) {
       GetProductsList();
@@ -41,9 +43,11 @@ export const Products = () => {
         isDeleting={isDeleting}
         callBack={FormCallBack}
         product={selectedProduct}
-      />)
+      />);
+      setModalFooter(<></>);
     }
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (reload) {
@@ -57,18 +61,16 @@ export const Products = () => {
     setModalBody(<ProductForm
       callBack={FormCallBack}
       product={product}
-    />)
+    />);
+    setModalFooter(<></>);
   }
 
   const HandleDelete = (product: Product) => {
     setModalTitle(t("ProductForm.BtnDelete"));
-    setModalBody(<>
-      Te dispones a eliminar el producto {product.Name}<br />
-      Deseas continuar?
-    </>)
+    setModalBody(<><div dangerouslySetInnerHTML={{ __html: t("ProductForm.DeleteModalDescription").replace("{0}", product.Name) }}></div></>)
     setModalFooter(<>
       <Button onClick={() => RemoveProduct(product)} >
-        Eliminar {product.Name}
+        {t("ProductForm.BtnDelete")} {product.Name}
       </Button>
     </>)
 
@@ -107,40 +109,21 @@ export const Products = () => {
         setReload={setReload}
       />
       <div className={styles.home}>
-        <CategoryPanel listProduct={listProducts}
-          setListProductsFiltered={setListProductsFiltered} />
+        {
+          listProducts && listProducts.length > 0 && <CategoryPanel listProduct={listProducts}
+            setListProductsFiltered={setListProductsFiltered} />
+        }
+
+
         {/* ------ Listado de productos ------ */}
         <ProductList
           handleDelete={HandleDelete}
           handleEdit={HandleEdit}
           productList={listProductsFiltered}
+          title={pageText.Title}
         />
         {/* ------ Productos "trending/top ventas" ------ */}
-        <Card css={{ minWidth: "250px" }}>
-          <Card.Header className={styles.categoriesTitle}>
-            <FontAwesomeIcon icon={faRankingStar} style={{ height: 20 }} />
-            <h3 style={{ margin: 0 }}>Top ventas</h3>
-          </Card.Header>
-          <Card.Body css={{ display: "flex", gap: 20, padding: 20, flexWrap: "wrap" }}>
-            {listProducts && listProducts.slice(0, 5).map(item => (
-              <Card isHoverable isPressable variant="bordered">
-                <Card.Body css={{ p: 0 }}>
-                  <Card.Image
-                    src={item.Images}
-                    objectFit="cover"
-                    width="100%"
-                    height={140}
-                    alt={item.title} />
-                </Card.Body>
-                <Card.Footer css={{ justifyItems: "flex-start", backgroundColor: "Gray" }}>
-                  <Row wrap="wrap" justify="center" align="center">
-                    <h6>{item.Name}</h6>
-                  </Row>
-                </Card.Footer>
-              </Card>
-            ))}
-          </Card.Body>
-        </Card>
+        <BestSeller className={styles.bestSellers} products={bestSellers} />
       </div>
     </div>
   );
@@ -152,7 +135,6 @@ const ProductsStyle = createUseStyles({
     flexDirection: "column",
     width: "100%",
     backgroundColor: "#dfdfdf",
-    height: "100vh"
   },
   textCategory: {
     fontWeight: "bold",
@@ -175,7 +157,19 @@ const ProductsStyle = createUseStyles({
   home: {
     display: "flex",
     padding: 20,
-    gap: 20
+    gap: 20,
+    justifyContent: "space-between",
+    "@media screen and (max-width: 768px)": {
+      flexDirection: "column"
+    }
+  },
+  bestSellers: {
+    width: "20%",
+    maxWidth: "min-content",
+    "@media screen and (max-width: 768px)": {
+      display: "none"
+    }
   }
 
 });
+

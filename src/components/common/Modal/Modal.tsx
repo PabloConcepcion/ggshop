@@ -9,6 +9,8 @@ interface IModalProps {
     actions?: ReactNode;
     visible: boolean;
     onHide: any;
+    className?: string;
+    fullWidth?: boolean;
 }
 
 export const ModalComponent = (props: IModalProps) => {
@@ -19,28 +21,25 @@ export const ModalComponent = (props: IModalProps) => {
         setVisible(false);
         props.onHide(false);
     };
-    return <div>
-        <Modal
-            closeButton
-            aria-labelledby="modal-title"
-            open={visible || props.visible}
-            onClose={() => closeHandler()}
-            className={styles.containerModal}
-            width="100%"
-        >
-            <Modal.Header>
-                <Text b id="modal-title" size={20}>
-                    {props.title}
-                </Text>
-            </Modal.Header>
-            <Modal.Body className={styles.modalBody}>
-                {props.body}
-            </Modal.Body>
-            <Modal.Footer>
-                {props.actions && props.actions}
-            </Modal.Footer>
-        </Modal>
-    </div>
+    return <Modal
+        closeButton
+        open={visible || props.visible}
+        onClose={() => closeHandler()}
+        className={styles.containerModal + " " + props.className || ""}
+    >
+        <Modal.Header>
+            <Text b id="modal-title" size={20}>
+                {props.title}
+            </Text>
+        </Modal.Header>
+        <Modal.Body className={styles.modalBody}>
+            {props.body}
+        </Modal.Body>
+        <Modal.Footer>
+            {props.actions && props.actions}
+        </Modal.Footer>
+    </Modal>
+
 }
 
 
@@ -48,7 +47,6 @@ export const ModalComponent = (props: IModalProps) => {
 
 const ModalStyle = createUseStyles({
     containerModal: {
-
     },
     modalBody: {
 

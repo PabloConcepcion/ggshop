@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Product } from "../../model/Product";
-import { Badge } from "../Badge/Badge";
+import { Product } from "../../../model/Product";
+import { Badge } from "../../Badge/Badge";
 
 
 interface ICategoryListProps {

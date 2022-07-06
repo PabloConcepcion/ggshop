@@ -1,13 +1,12 @@
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Input, Text } from "@nextui-org/react";
+import { Input, Text } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
 import { GetEmptyProduct, Product } from "../../model/Product";
-import { CategoryList } from "../CategoryList/CategoryList";
 import { ModalComponent } from "../common/Modal/Modal";
-import { ProductForm } from "../ProductForm/ProductForm";
+import { ProductForm } from "../ProductList/ProductForm/ProductForm";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 interface IHeaderProps {
@@ -32,6 +31,7 @@ export const Header = (props: IHeaderProps) => {
 
   return (
     <div className={styles.headerContainer}>
+
       <ModalComponent
         visible={showModal}
         onHide={setShowModal}
@@ -44,7 +44,7 @@ export const Header = (props: IHeaderProps) => {
           onChange={(e) => props.setListProductsFiltered(props.listProduct.filter(x => x.Name.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0 || x.Description.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0))}
           clearable
           contentRightStyling={false}
-          placeholder="Buscar un producto..."
+          placeholder={pageText.Placeholder}
           css={{ width: 600, marginLeft: 50 }}
           contentRight={
             <FontAwesomeIcon
@@ -58,7 +58,6 @@ export const Header = (props: IHeaderProps) => {
             <FontAwesomeIcon icon={faAdd} />
           </button>
         </div>
-        {/* <CategoryList className={styles.categories} onClickCategory={props.setListProductsFiltered} productList={props.listProduct} /> */}
       </div>
     </div>
   );
@@ -71,18 +70,17 @@ const HeaderStyle = createUseStyles({
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
-    padding: 20,
     backgroundColor: "white"
   },
 
   header: {
-    // backgroundColor: "#ffff7a",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    padding: 20,
-    borderRadius: 15
+    paddingBottom: 20,
+    borderRadius: 15,
+    flexWrap: "wrap"
   },
 
   button: {

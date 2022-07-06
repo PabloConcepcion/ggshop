@@ -5,15 +5,24 @@ import reportWebVitals from './reportWebVitals';
 import { Home } from './pages/Home';
 import './translate/i18n/i18n.config';
 import { NextUIProvider } from '@nextui-org/react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { routes } from './routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <NextUIProvider>
-    <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        {routes.map((item: any, index: number) => {
+          return <Route key={index} path={item.path} element={item.element} />;
+        })}
+      </Routes>
+    </BrowserRouter>
+    {/* <React.StrictMode>
       <Home />
-    </React.StrictMode>
+    </React.StrictMode> */}
   </NextUIProvider>
 );
 

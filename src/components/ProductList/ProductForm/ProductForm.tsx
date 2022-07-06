@@ -2,9 +2,10 @@ import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createUseStyles } from "react-jss";
-import { DeleteProduct, NewProduct, UpdateProduct } from "../../api/products";
-import { GetEmptyProduct, Product } from "../../model/Product"
-import { InputCustom } from "../common/InputCustom/InputCustom"
+import { DeleteProduct, NewProduct, UpdateProduct } from "../../../api/products";
+import { GetEmptyProduct, Product } from "../../../model/Product"
+import { InputCustom } from "../../common/InputCustom/InputCustom"
+import mockProducts from "../../../assets/productMock.json";
 
 interface IProductFormProps {
   product: Product,
@@ -17,6 +18,7 @@ export const ProductForm = (props: IProductFormProps) => {
   const { t } = useTranslation();
   const pageText: any = t("ProductForm", { returnObjects: true });
   const styles = ProductFormStyle();
+  const showSecretButton = localStorage.getItem("secreto");
   const HandleProduct = async () => {
     if (props.isDeleting) {
       await DeleteProduct(selectedProduct);
@@ -41,6 +43,13 @@ export const ProductForm = (props: IProductFormProps) => {
       txtButton = pageText.BtnAdd;
     }
   }
+  const AddDefaultProducts = () => {
+    mockProducts.forEach(async (item: Product) => {
+      await NewProduct(item);
+    });
+    props.callBack();
+  }
+
   const emptyProduct = GetEmptyProduct();
   const productFields = Object.keys(emptyProduct);
   return (<div className={styles.formContainer}>
@@ -77,10 +86,16 @@ export const ProductForm = (props: IProductFormProps) => {
         label="Imagen del producto"
         value={selectedProduct.Images[0]}
       /> */}
-      <img className={styles.imgProduct} src={selectedProduct.Images[0]} />
+      <img className={styles.imgProduct} src={selectedProduct.Images} alt={selectedProduct.Name} />
       <Button type="button" onClick={() => HandleProduct()}>
         {txtButton}
       </Button>
+      {
+        showSecretButton && <Button type="button" onClick={() => AddDefaultProducts()}>
+          Añadir productos predefinidos
+        </Button>
+      }
+
     </form>
   </div>
 

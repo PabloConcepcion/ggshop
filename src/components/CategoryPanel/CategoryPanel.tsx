@@ -1,10 +1,11 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Card } from "@nextui-org/react"
+import { Card, Text } from "@nextui-org/react"
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { createUseStyles } from "react-jss"
 import { Product } from "../../model/Product"
-import { CategoryList } from "../CategoryList/CategoryList"
+import { CategoryList } from "./CategoryList/CategoryList"
 
 
 interface CategoryPanelProps {
@@ -14,13 +15,17 @@ interface CategoryPanelProps {
 
 export const CategoryPanel = (props: CategoryPanelProps) => {
 
+    const { t } = useTranslation();
+    const pageText: any = t("Category", { returnObjects: true });
     const styles = CategoryPanelStyle();
     return <>
         {/* ------ Categorías ------ */}
-        <Card css={{ width: "flex-basis: 15%" }}>
+        <Card className={styles.categoryPanel}>
             <Card.Header className={styles.categoriesTitle}>
-                <FontAwesomeIcon icon={faBars} style={{ height: 20 }} />
-                <h3 style={{ margin: 0 }}>Categorías</h3>
+                <FontAwesomeIcon icon={faBars} style={{ height: 15 }} />
+                <Text h3>
+                    {pageText.Title}
+                </Text>
             </Card.Header>
             <Card.Body>
                 <CategoryList
@@ -39,7 +44,11 @@ const CategoryPanelStyle = createUseStyles({
     categories: {
         display: "flex",
         flexDirection: "column",
-        gap: 20
+        gap: 20,
+        "@media screen and (max-width: 768px)": {
+            flexDirection: "row"
+        },
+        flexWrap: "wrap"
     },
 
     categoriesTitle: {
@@ -47,5 +56,14 @@ const CategoryPanelStyle = createUseStyles({
         alignItems: "center",
         gap: 10
     },
+    categoryPanel: {
+
+        minWidth: "fit-content",
+        maxWidth: "min-content",
+        height: "fit-content",
+        "@media screen and (max-width: 768px)": {
+            flexDirection: "column"
+        }
+    }
 
 })

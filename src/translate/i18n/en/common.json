@@ -1,0 +1,28 @@
+{
+    "Products": {
+        "Title": "Latest Products",
+        "BtnCreateProduct": "Create Product",
+        "Categories_All": "All Categories"
+    },
+    "ProductForm": {
+        "Name": "Product name",
+        "Description": "Product Description",
+        "Price": "Product price",
+        "Category": "Product category",
+        "Images": "Product Image",
+        "BtnAdd": "Add product",
+        "BtnEdit": "Update product",
+        "BtnDelete": "Delete product",
+        "DeleteModalDescription": "You are about to delete the product {0}<br />Do you want to continue?"
+    },
+    "Header": {
+        "Title": "GG Shop 🛒",
+        "Placeholder": "Search a product..."
+    },
+    "Category": {
+        "Title": "Categories"
+    },
+    "BestSellers": {
+        "Title": "Best seller"
+    }
+}

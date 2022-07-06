@@ -1,0 +1,80 @@
+[
+    {
+        "Name": "Secador de pelo profesional",
+        "Category": "Estética",
+        "Images": "https://m.media-amazon.com/images/I/6160Q9ZeRtL._SY355_.jpg",
+        "Description": "Secador secadores de pelo 1875 W secador de pelo profesional secador de pelo de iones negativos calor infrarrojo lejano 2 de velocidad y 3 portátil de calor blowdryers AC moto – Anillo Colgante jr-104 a negro",
+        "Price": "100€"
+    },
+    {
+        "Name": "Caja de herramientas de acero",
+        "Category": "Herramientas",
+        "Images": "https://www.lidl.es/media/product/0/0/3/1/9/2/7/caja-de-herramientas-de-acero-zoom.jpg",
+        "Description": "Caja de herramientas de acero con 4 bandejas extraíbles de deslizamiento suave y un cajón en la parte inferior.",
+        "Price": "30€"
+    },
+    {
+        "Name": "Póster God of War 2",
+        "Category": "Entretenimiento",
+        "Images": "https://images2.alphacoders.com/827/82742.jpg",
+        "Description": "Poster del fantasma de esparta",
+        "Price": "45€"
+    },
+    {
+        "Name": "Camiseta de Brawl Stars",
+        "Category": "Vestimenta",
+        "Images": "https://ae01.alicdn.com/kf/H373cb31890554e7cb16eb37276845f1cR/Camiseta-infantil-3D-Brawl-Stars-Leon.jpg_Q90.jpg",
+        "Description": "Fantástica camisa de Brawl Stars",
+        "Price": "20€"
+    },
+    {
+        "Name": "Póster Kingdom Hearts 3",
+        "Category": "Entretenimiento",
+        "Images": "https://image.api.playstation.com/cdn/EP0082/CUSA12025_00/OHNJ80jcQ8TDIAK7KmNQdzXswaXoxAH0.png",
+        "Description": "Póster de edición coleccionista de Kingdom Hearts 3",
+        "Price": "50€"
+    },
+    {
+        "Name": "Máquina de coser Singer vintage",
+        "Category": "Vintage",
+        "Images": "https://cloud10.todocoleccion.online/antiguedades-tecnicas/tc/2019/05/05/13/162456630_15570558887C2F9EF5_137984529.jpg",
+        "Description": "Estupenda máquina de coser clásica 100% funcional y en perfecto estado",
+        "Price": "450€"
+    },
+    {
+        "Category": "Smartphones",
+        "Id": "nUxcLSd9LlKHLjMo6uzI",
+        "Name": "iPhone 13",
+        "Images": "https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone13-family-lineup-220308_big.jpg.large.jpg",
+        "Description": "iPhone 13 pro max 128 gb",
+        "Price": "1200"
+    },
+    {
+        "Price": "210€",
+        "Description": "Juego imposible, he roto ya 3 mandos y voy por el cuarto. No soporto más, el precio es lo que me han costado los mandos, si la vida te parece fácil prueba con esta porquería",
+        "Images": "https://media.game.es/COVERV2/3D_L/198/198769.png",
+        "Category": "Entretenimiento",
+        "Name": "Elden Ring"
+    },
+    {
+        "Images": "https://ae01.alicdn.com/kf/H7d5d89d1d3fc4dad9bdb5b4be6793f82n/Shark-Leon-3d-Camiseta-de-manga-corta-para-ni-os-y-ni-as-ropa-bonita-para.jpg_350x350.jpg",
+        "Description": "Camiseta oficial del juego Brawl Stars",
+        "Price": "12€",
+        "Category": "Vestimenta",
+        "Name": "Camiseta Brawl Stars"
+    },
+    {
+        "Category": "PS2",
+        "Name": "Ratchet and clank 2",
+        "Price": "10€",
+        "Description": "Segunda entrega numerada de las aventuras del Lombax favorito de todas las generaciones",
+        "Images": "https://as01.epimg.net/meristation/imagenes/2004/02/24/album/1077650220_650220_000001_album_normal.jpg"
+    },
+    {
+        "Images": "https://eloutput.com/app/uploads-eloutput.com/2020/03/PS5-316.jpg?x=480&y=375&quality=40",
+        "Description": "Consola Play Station 5",
+        "Category": "Videojuegos",
+        "Name": "PS5",
+        "Price": "400"
+    }
+]

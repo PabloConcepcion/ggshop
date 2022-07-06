@@ -1,7 +1,7 @@
 import { Text } from "@nextui-org/react"
 import React from "react"
 import { createUseStyles } from "react-jss"
-import { Product } from "../../model/Product"
+import { Product } from "../../../model/Product"
 
 interface IProductInfo {
     product: Product
