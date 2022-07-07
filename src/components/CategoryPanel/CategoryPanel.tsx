@@ -18,8 +18,11 @@ export const CategoryPanel = (props: CategoryPanelProps) => {
     const { t } = useTranslation();
     const pageText: any = t("Category", { returnObjects: true });
     const styles = CategoryPanelStyle();
+
+    if (!props.listProduct) {
+        return <></>
+    }
     return <>
-        {/* ------ Categorías ------ */}
         <Card className={styles.categoryPanel}>
             <Card.Header className={styles.categoriesTitle}>
                 <FontAwesomeIcon icon={faBars} style={{ height: 15 }} />

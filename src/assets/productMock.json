@@ -76,5 +76,13 @@
         "Category": "Videojuegos",
         "Name": "PS5",
         "Price": "400"
+    },
+    {
+        "Category": "Peluches",
+        "Name": "Peluche de KK",
+        "Images": "https://i.pinimg.com/736x/4f/cf/aa/4fcfaa2f38964ef555ba07dfe47e387b.jpg",
+        "Id": "M3kxiteSjMthm5T1i762",
+        "Price": "40€",
+        "Description": "¡La deposición más valiosa del internet puede ser tuya por un módico precio!. Cumple tu sueño de dormir cómodamente sobre una gran pieza de... bueno, ya tu sabes"
     }
 ]

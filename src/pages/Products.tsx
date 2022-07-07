@@ -109,20 +109,16 @@ export const Products = () => {
         setReload={setReload}
       />
       <div className={styles.home}>
-        {
-          listProducts && listProducts.length > 0 && <CategoryPanel listProduct={listProducts}
-            setListProductsFiltered={setListProductsFiltered} />
-        }
+        <CategoryPanel listProduct={listProducts}
+          setListProductsFiltered={setListProductsFiltered} />
 
-
-        {/* ------ Listado de productos ------ */}
         <ProductList
           handleDelete={HandleDelete}
           handleEdit={HandleEdit}
           productList={listProductsFiltered}
           title={pageText.Title}
         />
-        {/* ------ Productos "trending/top ventas" ------ */}
+
         <BestSeller className={styles.bestSellers} products={bestSellers} />
       </div>
     </div>

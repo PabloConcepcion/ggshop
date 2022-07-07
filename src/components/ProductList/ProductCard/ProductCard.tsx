@@ -25,9 +25,14 @@ export const ProductCard = (props: IProductCardProps) => {
   const modalTitle = props.product.Name;
 
   const isBestSeller = !props.handleEdit && !props.handleDelete;
+
+  if (!props.product) {
+    return <></>
+  }
+  const className = isBestSeller ? styles.bestSellers : styles.cardContainer;
   return (
     <>
-      <Card className={isBestSeller ? styles.bestSellers : styles.cardContainer} isHoverable isPressable onClick={() => setShowModal(true)}>
+      <Card className={className} isHoverable isPressable onClick={() => setShowModal(true)}>
         <Card.Body css={{ p: 0 }}>
           <div style={{ backgroundImage: "url('" + props.product.Images + "')" }} className={styles.cardImage}></div>
         </Card.Body>
