@@ -56,7 +56,7 @@
 
 19. Instalar *[React Router DOM](https://reactrouter.com/docs/en/v6/getting-started/installation)*
 
-`npm install react-router-dom@6`
+`npm install react-router-dom`
 
 20. Establecer la home y la ruta de product. 
 
