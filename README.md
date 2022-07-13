@@ -1,4 +1,4 @@
-![Image text](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/ggshopwallpaper.jpg)
+![Image text](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/ggshop-banner.png)
 
 # GG Shop App Tutorial
 
@@ -14,49 +14,57 @@
 
 2. Instalar *[Visual Studio Code](https://code.visualstudio.com/download)*.
 
-3. Reiniciar el pc
+3. Reiniciar el pc.
 
-4. Ejecutar el siguiente comando para crear el proyecto de React con el template de TypeScript:
-
-`npx create-react-app ggshop --template typescript`
-
-5. Instalar el paquete de create react app:
+4. Ejecutar el siguiente comando para crear el proyecto de React con el template de TypeScript.
 
 `npx create-react-app ggshop --template typescript`
 
-6. Crear el proyecto base
+5. Instalar el paquete de create react app.
 
-7. Instalar react jss
+`npx create-react-app ggshop --template typescript`
 
-8. Crear app de firebase
+6. Crear el proyecto base.
 
-9. Crear archivo de configuración de firebase
+7. Instalar *[React JSS](https://www.npmjs.com/package/react-jss)* .
 
-10. Comenzar a programar 
+`npm install react-jss`
 
-11. Crear model product 
+8. Crearse el proyecto de *[Firebase](https://console.firebase.google.com/u/0/)* 🔥 
 
-12. Crear La home
+9. Crear archivo de configuración de Firebase.
 
-13. Crear formulario de producto 
+10. Comenzar a programar 💻 
 
-14. Vincular el formulario al añadir, actualizar y eliminar
+11. Crear model product .
 
-15. Refrescar los datos tras las acciones
+12. Crear home.
+
+13. Crear formulario de producto.
+
+14. Vincular el formulario al añadir, actualizar y eliminar.
+
+15. Refrescar los datos tras las acciones.
 
 ### CRUD REALIZADO!! 🙌
 
 16. Limpiar codigo, componentizar, mejorar legibilidad.... 
 
-17. Instalar next ui
+17. Instalar *[Nexy UI](https://nextui.org)*
 
-18. Cambiar componentes por los de next
+`npm install @nextui-org/react`
 
-19. Instalar react router dom
+18. Cambiar componentes por los de Next UI.
 
-20. Establecer la home y la ruta de product 
+19. Instalar *[React Router DOM](https://reactrouter.com/docs/en/v6/getting-started/installation)*
 
-21. Instalar i18next
+`npm install react-router-dom@6`
+
+20. Establecer la home y la ruta de product. 
+
+19. Instalar *[i18next](https://www.i18next.com/overview/getting-started)*
+
+`npm install i18next --save`
 
 
 
