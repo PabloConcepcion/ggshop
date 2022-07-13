@@ -1,6 +1,6 @@
 ![Image text](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/ggshop-banner.png)
 
-# GG Shop App Tutorial
+# GG Shop App Tutorial 🛒
 
 ## Requisitos:
 
@@ -22,21 +22,19 @@
 
 5. Instalar el paquete de create react app.
 
-`npx create-react-app ggshop --template typescript`
-
 6. Crear el proyecto base.
 
 7. Instalar *[React JSS](https://www.npmjs.com/package/react-jss)* .
 
 `npm install react-jss`
 
-8. Crearse el proyecto de *[Firebase](https://console.firebase.google.com/u/0/)* 🔥 
+8. Crear el proyecto de *[Firebase](https://console.firebase.google.com/u/0/)* 🔥 
 
 9. Crear archivo de configuración de Firebase.
 
 10. Comenzar a programar 💻 
 
-11. Crear model product .
+11. Crear model product.
 
 12. Crear home.
 
@@ -48,9 +46,9 @@
 
 ### CRUD REALIZADO!! 🙌
 
-16. Limpiar codigo, componentizar, mejorar legibilidad.... 
+16. Limpiar código, componentizar, mejorar legibilidad...
 
-17. Instalar *[Nexy UI](https://nextui.org)*
+17. Instalar *[Next UI](https://nextui.org)*
 
 `npm install @nextui-org/react`
 
