@@ -4,7 +4,7 @@
 
 ![Image text](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/QR_Github_GGShop.png)
 
-# Pasos de para la creación de GG Shop App 🛒
+# Pasos para la creación de GG Shop App 🛒
 
 ## Requisitos:
 
