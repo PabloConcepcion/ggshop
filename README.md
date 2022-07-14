@@ -8,7 +8,7 @@
 
 ## Requisitos:
 
-> **IMPORTANTE**: Si se descargan el código tienen 
+> :warning: **IMPORTANTE**: Si se descargan el código tienen 
 > que cambiar el archivo de
 > configuración de Firebase por el suyo propio.
 
@@ -69,5 +69,7 @@
 `npm install i18next --save`
 
 
-
+## Bonus
+ 
+ Pdf con la charla de [React Para principiantes (con esteroides)](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/Charla React para principiantes con esteroides para compartir.pdf)
 
