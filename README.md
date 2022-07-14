@@ -2,7 +2,7 @@
 
 # QR al proyecto de GitHub 
 
-![Image text]("https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/QR Github GGShop.png")
+![Image text](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/QR_Github_GGShop.png)
 
 # Pasos de para la creación de GG Shop App 🛒
 
