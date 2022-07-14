@@ -71,5 +71,5 @@
 
 ## Bonus
  
- Pdf con la charla de [React Para principiantes (con esteroides)](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/Charla React para principiantes con esteroides para compartir.pdf)
+ Pdf con la charla de [React Para principiantes (con esteroides)](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/Charla-React-para-principiantes-con-esteroides-para-compartir.pdf)
 
