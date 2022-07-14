@@ -5,7 +5,7 @@
 ## Requisitos:
 
 > **IMPORTANTE**: Si se descargan el código tienen 
-> que cambiar el archivo de configuración
+> que cambiar el archivo de
 > configuración de Firebase por el suyo propio.
 
 ## Pasos a seguir:
