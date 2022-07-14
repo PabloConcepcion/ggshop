@@ -1,6 +1,6 @@
 ![Image text](https://github.com/PabloConcepcion/ggshop/blob/master/src/assets/img/ggshop-banner.png)
 
-# GG Shop App Tutorial 🛒
+# Pasos de para la creación de GG Shop App 🛒
 
 ## Requisitos:
 
